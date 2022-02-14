@@ -91,3 +91,8 @@ sudo systemctl enable $IR_KEYTAB_SERVICE_FILE
 
 # Install triggerhappy
 sudo apt-get install triggerhappy -y
+
+sudo mkdir -p /opt/triggerhappy/audio/
+sudo cp ./audio.conf /etc/triggerhappy/triggers.d/audio.conf
+
+sudo systemctl restart triggerhappy
