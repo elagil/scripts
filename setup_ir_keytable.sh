@@ -71,10 +71,16 @@ sudo mv /tmp/$SAMSUNG_KEYMAP_FILE $SAMSUNG_KEYMAP_DIR/$SAMSUNG_KEYMAP_FILE
 IR_KEYTAB_SERVICE_FILE=ir_keytable.service
 cat <<EOT > /tmp/$IR_KEYTAB_SERVICE_FILE
 [Unit]
-Description=Foo
+Description=Load ir-ketable definition
+Requires=multi-user.target
+Wants=systemd-modules-load.service
 
 [Service]
-ExecStart=ir-keytable -c -w $SAMSUNG_KEYMAP_DIR/$SAMSUNG_KEYMAP_FILE
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=ir-keytable -c -w "/etc/rc_keymaps/samsung_necx.toml"
+ExecReload=ir-keytable -c -w "/etc/rc_keymaps/samsung_necx.toml"
+ExecStop=ir-keytable -c
 
 [Install]
 WantedBy=multi-user.target
