@@ -17,7 +17,7 @@ sudo apt-get install ir-keytable -y
 SAMSUNG_KEYMAP_DIR=/etc/rc_keymaps
 SAMSUNG_KEYMAP_FILE=samsung_necx.toml
 
-sudo mv ./$SAMSUNG_KEYMAP_FILE $SAMSUNG_KEYMAP_DIR/$SAMSUNG_KEYMAP_FILE
+sudo cp ./$SAMSUNG_KEYMAP_FILE $SAMSUNG_KEYMAP_DIR/$SAMSUNG_KEYMAP_FILE
 
 # Run ir-keytab at boot
 IR_KEYTAB_SERVICE_FILE=ir_keytable.service
@@ -25,7 +25,7 @@ IR_KEYTAB_SERVICE_FILE=ir_keytable.service
 sudo systemctl stop $IR_KEYTAB_SERVICE_FILE
 sudo systemctl disable $IR_KEYTAB_SERVICE_FILE
 
-sudo mv ./$IR_KEYTAB_SERVICE_FILE /usr/lib/systemd/system/$IR_KEYTAB_SERVICE_FILE
+sudo cp ./$IR_KEYTAB_SERVICE_FILE /usr/lib/systemd/system/$IR_KEYTAB_SERVICE_FILE
 
 sudo systemctl daemon-reload
 sudo systemctl start $IR_KEYTAB_SERVICE_FILE
