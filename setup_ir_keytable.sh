@@ -5,7 +5,7 @@ LOGIND_FILE=logind.conf
 LOGIND_DIR=/etc/systemd
 cat $LOGIND_DIR/$LOGIND_FILE | grep -v "HandlePowerKey" > /tmp/$LOGIND_FILE
 echo "HandlePowerKey=ignore" >> /tmp/$LOGIND_FILE
-sudo mv /tmp/$LOGIND_FILE /etc/systemd/$LOGIND_FILE
+sudo mv /tmp/$LOGIND_FILE $LOGIND_DIR/$LOGIND_FILE
 
 sudo systemctl restart systemd-logind
 
@@ -19,17 +19,12 @@ SAMSUNG_KEYMAP_FILE=samsung_necx.toml
 
 sudo cp ./$SAMSUNG_KEYMAP_FILE $SAMSUNG_KEYMAP_DIR/$SAMSUNG_KEYMAP_FILE
 
-# Run ir-keytab at boot
-IR_KEYTAB_SERVICE_FILE=ir_keytable.service
+# Load ir-keytable config at boot
+RC_MAP_FILE=rc_maps.conf
+RC_MAP_DIR=/etc
 
-sudo systemctl stop $IR_KEYTAB_SERVICE_FILE
-sudo systemctl disable $IR_KEYTAB_SERVICE_FILE
-
-sudo cp ./$IR_KEYTAB_SERVICE_FILE /usr/lib/systemd/system/$IR_KEYTAB_SERVICE_FILE
-
-sudo systemctl daemon-reload
-sudo systemctl start $IR_KEYTAB_SERVICE_FILE
-sudo systemctl enable $IR_KEYTAB_SERVICE_FILE
+echo "* * $SAMSUNG_KEYMAP_FILE" >> /tmp/$RC_MAP_FILE
+sudo mv /tmp/$RC_MAP_FILE $RC_MAP_DIR/$RC_MAP_FILE
 
 # Install triggerhappy
 sudo apt-get install triggerhappy -y
