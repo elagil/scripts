@@ -20,7 +20,7 @@ SAMSUNG_KEYMAP_FILE=samsung_necx.toml
 sudo cp ./$SAMSUNG_KEYMAP_FILE $SAMSUNG_KEYMAP_DIR/$SAMSUNG_KEYMAP_FILE
 
 # Load ir-keytable config at boot
-RC_MAP_FILE=rc_maps.conf
+RC_MAP_FILE=rc_maps.cfg
 RC_MAP_DIR=/etc
 
 echo "* * $SAMSUNG_KEYMAP_FILE" >> /tmp/$RC_MAP_FILE
